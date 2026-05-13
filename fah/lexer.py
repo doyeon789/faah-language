@@ -27,7 +27,7 @@ MASTER_PATTERN = re.compile(
 class LexerError(Exception):
     pass
 
-class Laxer:
+class Lexer:
     def __init__(self, source: str):
         self.source = source
 
