@@ -91,7 +91,7 @@ class Parser:
             return self.parse_print_int()
 
         elif tok.type == TokenType.PRINT_CHAR:
-            raise setattr.parse_print_char()
+            return self.parse_print_char()
 
         else:
             self.advance()
@@ -110,7 +110,7 @@ class Parser:
         expr = self.parse_expr()
         return PrintInt(expr=expr)
     
-    
+
     def parse_print_char(self) -> PrintChar:
         tok = self.advance()  # F[!@]+H 소비
         binary = tok.value[1:-1]  # F 와 H 사이만 추출
