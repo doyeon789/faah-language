@@ -5,6 +5,10 @@ class TokenType(Enum):
     PROGRAM_START = auto() # I got this.
     PROGRAM_END = auto() # Pew
 
+    # 변수
+    FAH_SET = auto() # F(a*)H  - 대입
+    FAH_GET = auto()  # f(a*)h  - 사용
+
     # 정수 리터럴
     INT_PLUS  = auto() # !  (+1)
     INT_MINUS = auto() # @  (-1)
