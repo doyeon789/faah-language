@@ -86,6 +86,9 @@ class Parser:
 
         elif tok.type == TokenType.UNKNOWN:
             raise ParseError(f"line {tok.line}: unknown token '{tok.value}'")
+        
+        elif tok.type == TokenType.PRINT_INT:
+            return self.parse_print_int()
 
         else:
             self.advance()
@@ -97,3 +100,8 @@ class Parser:
             t = self.advance()
             value += 1 if t.type == TokenType.INT_PLUS else -1
         return IntLiteral(value=value)
+    
+    def parse_print_int(self) -> PrintInt:
+        self.advance()
+        expr = self.parse_expr()
+        return PrintInt(expr=expr)
