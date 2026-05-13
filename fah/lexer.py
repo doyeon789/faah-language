@@ -12,6 +12,7 @@ from .tokens import Token, TokenType
 
 # 토큰 패턴 
 TOKEN_PATTERNS = [
+    (TokenType.COMMENT, r'//[^\n]*'),
     (TokenType.PROGRAM_START, r'I got this\.'),
     (TokenType.PROGRAM_END, r'Pew'),
     (TokenType.PRINT_CHAR, r'F[!@]+H!?'),
