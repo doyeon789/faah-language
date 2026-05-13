@@ -44,6 +44,7 @@ class PrintInt:
     """정수 출력  e.g. (Click)!!! → 3 출력"""
     expr: object   # IntLiteral | VarGet
 
+
 @dataclass
 class PrintChar:
     """문자 출력  e.g. F!@@@@@@!H → 'A' 출력 (2진수)"""
