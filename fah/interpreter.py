@@ -14,7 +14,12 @@ class Interpreter:
     def __init__(self):
         self.variables: dict[int, int] = {}
 
+    def get_var(self, index: int) -> int:
+        return self.variables.get(index, 0)
+
+    def set_var(self, index: int, value: int):
+        self.variables[index] = value
+
     def run(self, program: Program):
         for stmt in program.body:
             self.exec_stmt(stmt)
-
