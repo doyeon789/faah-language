@@ -38,18 +38,6 @@ class Parser:
         while self.peek().type == TokenType.NEWLINE:
             self.advance()
 
-    def parse_stmt(self):
-        tok = self.peek()
-
-        if tok.type == TokenType.FAH_SET:
-            return self.parse_var_set()
-
-        elif tok.type == TokenType.UNKNOWN:
-            raise ParseError(f"line {tok.line}: unknown token '{tok.value}'")
-
-        else:
-            self.advance()
-            return None
 
     def parse_var_set(self) -> VarSet:
         tok = self.advance()  # FAH_SET
@@ -89,3 +77,23 @@ class Parser:
         self.expect(TokenType.PROGRAM_END)
 
         return Program(body=body)
+    
+    def parse_stmt(self):
+        tok = self.peek()
+
+        if tok.type == TokenType.FAH_SET:
+            return self.parse_var_set()
+
+        elif tok.type == TokenType.UNKNOWN:
+            raise ParseError(f"line {tok.line}: unknown token '{tok.value}'")
+
+        else:
+            self.advance()
+            return None
+    
+    def parse_int_literal(self) -> IntLiteral:
+        value = 0
+        while self.peek().type in (TokenType.INT_PLUS, TokenType.INT_MINUS):
+            t = self.advance()
+            value += 1 if t.type == TokenType.INT_PLUS else -1
+        return IntLiteral(value=value)
