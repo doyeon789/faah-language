@@ -112,7 +112,9 @@ class Parser:
     
 
     def parse_print_char(self) -> PrintChar:
-        tok = self.advance()  # F[!@]+H 소비
-        binary = tok.value[1:-1]  # F 와 H 사이만 추출
-        binary = binary.replace('!', '1').replace('@', '0')  # 2진수 문자열로 변환
-        return PrintChar(binary=binary)
+        tok = self.advance()
+        newline = tok.value.endswith('H!')  # H! 로 끝나면 줄바꿈
+        inner = tok.value[1:]
+        inner = inner[:-1] if not newline else inner[:-2]
+        binary = inner.replace('!', '1').replace('@', '0')
+        return PrintChar(binary=binary, newline=newline)
