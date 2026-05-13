@@ -14,6 +14,10 @@ from .tokens import Token, TokenType
 TOKEN_PATTERNS = [
     (TokenType.PROGRAM_START, r'I got this\.'),
     (TokenType.PROGRAM_END, r'Pew'),
+    (TokenType.FAH_SET, r'Fa(a*)h'),
+    (TokenType.FAH_GET, r'fa(a*)h'),
+    (TokenType.INT_PLUS, r'!'),
+    (TokenType.INT_MINUS, r'@'),
     (TokenType.NEWLINE, r'\n'),
     (TokenType.UNKNOWN, r'.'),
 ]
@@ -49,6 +53,12 @@ class Lexer:
                     # 공백은 조용히 무시, 나머지는 경고
                     if group.strip():
                         tokens.append(Token(TokenType.UNKNOWN, group, line))
+
+                elif ttype in (TokenType.FAH_SET, TokenType.FAH_GET):
+                    a_count = group.count('a')
+                    tok = Token(ttype, group, line)
+                    tok.index = a_count
+                    tokens.append(tok)
 
                 else:
                     tokens.append(Token(ttype, group, line))
