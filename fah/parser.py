@@ -38,6 +38,40 @@ class Parser:
         while self.peek().type == TokenType.NEWLINE:
             self.advance()
 
+    def parse_stmt(self):
+        tok = self.peek()
+
+        if tok.type == TokenType.FAH_SET:
+            return self.parse_var_set()
+
+        elif tok.type == TokenType.UNKNOWN:
+            raise ParseError(f"line {tok.line}: unknown token '{tok.value}'")
+
+        else:
+            self.advance()
+            return None
+
+    def parse_var_set(self) -> VarSet:
+        tok = self.advance()  # FAH_SET
+        index = getattr(tok, 'index', tok.value.count('a'))
+        expr  = self.parse_expr()
+        return VarSet(index=index, expr=expr)
+
+    def parse_expr(self):
+        tok = self.peek()
+
+        # 정수 리터럴: ! 또는 @ 가 하나 이상
+        if tok.type in (TokenType.INT_PLUS, TokenType.INT_MINUS):
+            return self.parse_int_literal()
+
+        # 변수 읽기
+        if tok.type == TokenType.FAH_GET:
+            t = self.advance()
+            return VarGet(index=getattr(t, 'index', t.value.count('a')))
+
+        # 아무것도 없으면 0
+        return IntLiteral(value=0)
+
     # 파싱
     def parse(self) -> Program:
         self.expect(TokenType.PROGRAM_START)
