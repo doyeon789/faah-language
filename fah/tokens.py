@@ -12,3 +12,11 @@ class TokenType(Enum):
     EOF = auto()
     UNKNOWN = auto()
 
+class Token:
+    def __init__(self, type: TokenType, value:str, line:int=0):
+        self.type = type
+        self.value = value
+        self.line = line
+    
+    def __repr__(self):
+        return f'Token({self.type}, {self.value!r}, line={self.line})'
