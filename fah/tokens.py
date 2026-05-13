@@ -11,6 +11,7 @@ class TokenType(Enum):
 
     # 츨력
     PRINT_INT = auto()
+    PRINT_CHAR = auto()
 
     # 정수 리터럴
     INT_PLUS  = auto() # !  (+1)
