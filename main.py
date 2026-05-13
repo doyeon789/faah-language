@@ -34,7 +34,7 @@ def run_file(path: str):
 
 
 if __name__ == '__main__':
-    args = sys.args[1:]
+    args = sys.argv[1:]
 
     # -- <= 콘솔 명령어 나중에 만들기 위해서
     # -- 제외한 파일 불러오기
