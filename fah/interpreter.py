@@ -36,7 +36,7 @@ class Interpreter:
             print(value)
 
         elif isinstance(node, PrintChar):
-            print(chr(int(node.binary, 2)), end='')    
+            print(chr(int(node.binary, 2)), end='\n' if node.newline else '')
 
         else:
             raise RuntimeError_(f"알 수 없는 노드: {type(node)}")
