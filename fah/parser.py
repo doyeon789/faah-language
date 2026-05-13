@@ -7,6 +7,7 @@ Parser: Token list -> AST
 """
 
 from .tokens import Token, TokenType
+from .ast_nodes import *
 
 class ParseError(Exception):
     pass
@@ -36,3 +37,21 @@ class Parser:
     def skip_newlines(self):
         while self.peek().type == TokenType.NEWLINE:
             self.advance()
+
+    # 파싱
+    def parse(self) -> Program:
+        self.expect(TokenType.PROGRAM_START)
+        self.skip_newlines()
+
+        body = []
+        while self.peek().type not in (TokenType.PROGRAM_END, TokenType.EOF):
+            stmt = self.parse_stmt()
+            if stmt is not None:
+                body.append(stmt)
+            self.skip_newlines()
+
+        if self.peek().type == TokenType.EOF:
+            raise ParseError("프로그램이 'Pew' 없이 끝났어요!")
+        self.expect(TokenType.PROGRAM_END)
+
+        return Program(body=body)
