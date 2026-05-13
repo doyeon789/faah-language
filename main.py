@@ -1,4 +1,7 @@
 import sys
+from fah.lexer import Lexer, LexerError
+from fah.parser import Parser, ParseError
+from fah.interpreter import Interpreter, RuntimeError_
 
 def run_file(path: str):
     
@@ -7,7 +10,13 @@ def run_file(path: str):
     except FileNotFoundError:
         print(f"[ERRPR] Can't find files: {path}" )
 
-    # Lexing <- 문법 패턴 관리
+    # Lexing 
+    try:
+        tokens = Lexer(source).tokenize()
+    except LexerError as e:
+        print(f"[Lexer Error] {e}")
+        sys.exit(1)
+
 
     # Parshing <- 코드가져오기
 
