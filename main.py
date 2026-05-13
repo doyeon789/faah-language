@@ -18,16 +18,19 @@ def run_file(path: str):
         sys.exit(1)
 
 
-    # Parshing
+    # Parsing
     try:
         ast = Parser(tokens).parse()
     except ParseError as e:
         print(f"[Parser Error] {e}")
         sys.exit(1)
 
-    # Interpreting <- 인터프린팅
-
-
+    # Interpreting  
+    try:
+        Interpreter().run(ast)
+    except RuntimeError_ as e:
+        print(f"[Runtime Error] {e}")
+        sys.exit(1)
 
 
 if __name__ == '__main__':
