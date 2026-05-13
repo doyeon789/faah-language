@@ -31,6 +31,10 @@ class Interpreter:
             value = self.eval_expr(node.expr)
             self.set_var(node.index, value)
 
+        elif isinstance(node, PrintInt):
+            value = self.eval_expr(node.expr)
+            print(value)
+
         else:
             raise RuntimeError_(f"알 수 없는 노드: {type(node)}")
         
