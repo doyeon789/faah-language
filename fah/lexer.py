@@ -14,7 +14,7 @@ from .tokens import Token, TokenType
 TOKEN_PATTERNS = [
     (TokenType.PROGRAM_START, r'I got this\.'),
     (TokenType.PROGRAM_END, r'Pew'),
-    (TokenType.PRINT_CHAR, r'F[!@]+H'),
+    (TokenType.PRINT_CHAR, r'F[!@]+H!?'),
     (TokenType.FAH_SET, r'F(a*)h'),
     (TokenType.FAH_GET, r'f(a*)h'),
     (TokenType.PRINT_INT, r'\(Click\)'),
