@@ -49,3 +49,4 @@ class PrintInt:
 class PrintChar:
     """문자 출력  e.g. F!@@@@@@!H → 'A' 출력 (2진수)"""
     binary: str   # ! = 1, @ = 0 로 구성된 문자열
+    newline: bool = False   # 줄바꿈 상태
