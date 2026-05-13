@@ -1,7 +1,19 @@
 import sys
 
 def run_file(path: str):
-    pass
+    
+    try:
+        source = open(path, encoding='utf-8').read()
+    except FileNotFoundError:
+        print(f"[ERRPR] Can't find files: {path}" )
+
+    # Lexing <- 문법 패턴 관리
+
+    # Parshing <- 코드가져오기
+
+    # Interpreting <- 인터프린팅
+
+
 
 
 if __name__ == '__main__':
