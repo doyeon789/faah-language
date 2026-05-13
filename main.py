@@ -18,7 +18,12 @@ def run_file(path: str):
         sys.exit(1)
 
 
-    # Parshing <- 코드가져오기
+    # Parshing
+    try:
+        ast = Parser(tokens).parse()
+    except ParseError as e:
+        print(f"[Parser Error] {e}")
+        sys.exit(1)
 
     # Interpreting <- 인터프린팅
 
