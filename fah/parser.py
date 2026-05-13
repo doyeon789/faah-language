@@ -90,6 +90,9 @@ class Parser:
         elif tok.type == TokenType.PRINT_INT:
             return self.parse_print_int()
 
+        elif tok.type == TokenType.PRINT_CHAR:
+            raise setattr.parse_print_char()
+
         else:
             self.advance()
             return None
@@ -101,7 +104,15 @@ class Parser:
             value += 1 if t.type == TokenType.INT_PLUS else -1
         return IntLiteral(value=value)
     
+
     def parse_print_int(self) -> PrintInt:
         self.advance()
         expr = self.parse_expr()
         return PrintInt(expr=expr)
+    
+    
+    def parse_print_char(self) -> PrintChar:
+        tok = self.advance()  # F[!@]+H 소비
+        binary = tok.value[1:-1]  # F 와 H 사이만 추출
+        binary = binary.replace('!', '1').replace('@', '0')  # 2진수 문자열로 변환
+        return PrintChar(binary=binary)
