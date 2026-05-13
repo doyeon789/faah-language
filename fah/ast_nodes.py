@@ -43,3 +43,8 @@ class VarSet:
 class PrintInt:
     """정수 출력  e.g. (Click)!!! → 3 출력"""
     expr: object   # IntLiteral | VarGet
+
+@dataclass
+class PrintChar:
+    """문자 출력  e.g. F!@@@@@@!H → 'A' 출력 (2진수)"""
+    binary: str   # ! = 1, @ = 0 로 구성된 문자열
