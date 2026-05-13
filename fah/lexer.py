@@ -16,6 +16,7 @@ TOKEN_PATTERNS = [
     (TokenType.PROGRAM_END, r'Pew'),
     (TokenType.FAH_SET, r'F(a*)h'),
     (TokenType.FAH_GET, r'f(a*)h'),
+    (TokenType.PRINT_INT, r'\(Click\)'),
     (TokenType.INT_PLUS, r'!'),
     (TokenType.INT_MINUS, r'@'),
     (TokenType.NEWLINE, r'\n'),
