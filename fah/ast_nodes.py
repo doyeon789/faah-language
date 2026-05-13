@@ -36,3 +36,10 @@ class VarSet:
     """변수 대입  e.g. FaaH!!  → 2번째 변수에 2 대입"""
     index: int
     expr: object   # IntLiteral | VarGet | ...
+
+
+# 출력
+@dataclass
+class PrintInt:
+    """정수 출력  e.g. (Click)!!! → 3 출력"""
+    expr: object   # IntLiteral | VarGet
