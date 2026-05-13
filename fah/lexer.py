@@ -28,4 +28,31 @@ class LexerError(Exception):
     pass
 
 class Laxer:
-    pass
+    def __init__(self, source: str):
+        self.source = source
+
+    def tokenize(self) -> list[Token]:
+        tokens = []
+        line = 1
+
+        for m in MASTER_PATTERN.finditer(self.source):
+            for i, (ttype, _) in enumerate(TOKEN_PATTERNS):
+                group = m.group(f'T{i}')
+                if group is None:
+                    continue
+
+                if ttype == TokenType.NEWLINE:
+                    tokens.append(Token(TokenType.NEWLINE, '\\n', line))
+                    line += 1
+
+                elif ttype == TokenType.UNKNOWN:
+                    # 공백은 조용히 무시, 나머지는 경고
+                    if group.strip():
+                        tokens.append(Token(TokenType.UNKNOWN, group, line))
+
+                else:
+                    tokens.append(Token(ttype, group, line))
+                break
+        
+        tokens.append(Token(TokenType.EOF, '', line))
+        return tokens
