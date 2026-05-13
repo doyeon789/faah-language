@@ -63,6 +63,9 @@ class Lexer:
                     tok.index = a_count
                     tokens.append(tok)
 
+                elif ttype == TokenType.COMMENT:
+                    pass 
+
                 else:
                     tokens.append(Token(ttype, group, line))
                 break
