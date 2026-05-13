@@ -14,8 +14,7 @@ class Interpreter:
     def __init__(self):
         self.variables: dict[int, int] = {}
 
-        def run(self, program: Program):
-            for stmt in program.body:
-                self.exec_stmt(stmt)
+    def run(self, program: Program):
+        for stmt in program.body:
+            self.exec_stmt(stmt)
 
-                
