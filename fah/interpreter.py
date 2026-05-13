@@ -35,6 +35,9 @@ class Interpreter:
             value = self.eval_expr(node.expr)
             print(value)
 
+        elif isinstance(node, PrintChar):
+            print(chr(int(node.binary, 2)), end='')    
+
         else:
             raise RuntimeError_(f"알 수 없는 노드: {type(node)}")
         
